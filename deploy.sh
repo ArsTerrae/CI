@@ -40,6 +40,6 @@ echo "Git pushing"
 GIT_SSH=$DIR/gitssh.sh git push --tags git@github.com:HarvestMoon/CIBuilds.git master:master
 
 echo "Creating release"
-keep_trying ./github-release release -t $tag -n "CI ${TRAVIS_JOB_NUMBER}" -d ""
+keep_trying $DIR/github-release release -t $tag -n "CI ${TRAVIS_JOB_NUMBER}" -d ""
 echo "Uploading artifact"
-keep_trying ./github-release upload -t $tag -n "$newname" -f "$jarpath"
+keep_trying $DIR/github-release upload -t $tag -n "$newname" -f "$jarpath"
