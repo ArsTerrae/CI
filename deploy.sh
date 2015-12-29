@@ -22,7 +22,7 @@ pushd $DIR
 git clone https://github.com/HarvestMoon/CIBuilds.git builds
 
 pushd builds
-echo '*' Build.job '['${TRAVIS_JOB_NUMBER}']('https://travis-ci.org/${TRAVIS_REPO_SLUG}/jobs/${TRAVIS_JOB_ID}')', from commit '['$cutgitsha']('https://github.com/HarvestMoon/HarvestMoon/commit/${TRAVIS_BUILD_NUMBER}')', built on $(date -uR): '['$newname']('https://github.com/HarvestMoon/CIBuilds/releases/download/$tag/$newname')' >> BUILDS.md
+echo '*' Build.job '['${TRAVIS_JOB_NUMBER}']('https://travis-ci.org/${TRAVIS_REPO_SLUG}/jobs/${TRAVIS_JOB_ID}')', from commit '['$cutgitsha']('https://github.com/HarvestMoon/HarvestMoon/commit/${TRAVIS_COMMIT}')', built on $(date -uR): '['$newname']('https://github.com/HarvestMoon/CIBuilds/releases/download/$tag/$newname')' >> BUILDS.md
 echo $sha256 '*'$newname >> sha256sums.txt
 
 echo "Git commiting and tagging"
