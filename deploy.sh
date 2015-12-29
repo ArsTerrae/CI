@@ -4,7 +4,7 @@ DIR=$(dirname "$(readlink -f "$0")")
 
 keep_trying() {
     for _ in {1..20}; do
-        $* && break || sleep 3
+        "$@" && break || sleep 3
     done
 }
 
