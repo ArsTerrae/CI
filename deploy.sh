@@ -14,15 +14,15 @@ cutgitsha=$(echo $TRAVIS_COMMIT | cut -c -7)
 newname=$(basename $jarpath .jar)-ci${TRAVIS_JOB_NUMBER}-$cutgitsha.jar
 tag=ci${TRAVIS_JOB_NUMBER}
 
-git config --global user.name "Terrartis CI"
-git config --global user.email "TerrartisCI@users.noreply.github.com"
+git config --global user.name "Ars Terrae CI"
+git config --global user.email "ArsTerraeCI@users.noreply.github.com"
 
 echo "Updating files"
 pushd $DIR
-git clone https://github.com/Terrartis/CIBuilds.git builds
+git clone https://github.com/ArsTerrae/CIBuilds.git builds
 
 pushd builds
-echo '*' Build.job '['${TRAVIS_JOB_NUMBER}']('https://travis-ci.org/${TRAVIS_REPO_SLUG}/jobs/${TRAVIS_JOB_ID}')', from commit '['$cutgitsha']('https://github.com/Terrartis/Terrartis/commit/${TRAVIS_COMMIT}')', built on $(date -uR): '['$newname']('https://github.com/Terrartis/CIBuilds/releases/download/$tag/$newname')' >> BUILDS.md
+echo '*' Build.job '['${TRAVIS_JOB_NUMBER}']('https://travis-ci.org/${TRAVIS_REPO_SLUG}/jobs/${TRAVIS_JOB_ID}')', from commit '['$cutgitsha']('https://github.com/ArsTerrae/ArsTerrae/commit/${TRAVIS_COMMIT}')', built on $(date -uR): '['$newname']('https://github.com/ArsTerrae/CIBuilds/releases/download/$tag/$newname')' >> BUILDS.md
 echo $sha256 '*'$newname >> sha256sums.txt
 
 echo "Git commiting and tagging"
@@ -37,7 +37,7 @@ ssh-keygen -y -f $DIR/.ssh_id > $DIR/.ssh_id.pub
 export HM_SSH_ID=$DIR/.ssh_id
 
 echo "Git pushing"
-GIT_SSH=$DIR/gitssh.sh git push --tags git@github.com:Terrartis/CIBuilds.git master:master
+GIT_SSH=$DIR/gitssh.sh git push --tags git@github.com:ArsTerrae/CIBuilds.git master:master
 
 echo "Creating release"
 keep_trying $DIR/github-release release -t $tag -n "CI ${TRAVIS_JOB_NUMBER}" -d ""
